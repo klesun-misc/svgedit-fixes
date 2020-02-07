@@ -257,7 +257,7 @@ export const parseLengthValue = function (attr, val) {
   // Return a number if that's what it already is
   if (!isNaN(val)) {
     const num = val - 0;
-    return {amount: num, units: 'px', inPx: num};
+    return {amount: num, unit: 'px', inPx: num};
   }
   if (val.substr(-1) === '%') {
     // Deal with percentage, depends on attribute
@@ -267,19 +267,19 @@ export const parseLengthValue = function (attr, val) {
     const height = elementContainer_.getHeight();
 
     if (wAttrs.includes(attr)) {
-      return {amount: num, units: unit, inPx: num * width};
+      return {amount: num, unit: unit, inPx: num * width};
     }
     if (hAttrs.includes(attr)) {
-      return {amount: num, units: unit, inPx: num * height};
+      return {amount: num, unit: unit, inPx: num * height};
     }
     const inPx = num * Math.sqrt((width * width) + (height * height)) / Math.sqrt(2);
-    return {amount: num, units: unit, inPx: inPx};
+    return {amount: num, unit: unit, inPx: inPx};
   }
   const unit = val.substr(-2);
   const num = val.substr(0, val.length - 2);
   // Note that this multiplication turns the string into a number
   const inPx = num * typeMap_[unit];
-  return {amount: num, units: unit, inPx: inPx};
+  return {amount: num, unit: unit, inPx: inPx};
 };
 
 /**
