@@ -48,7 +48,7 @@ import {
   getMatrix, snapToAngle, isIdentity, rectsIntersect, transformBox
 } from './math.js';
 import {
-  convertToNum, convertAttrs, convertUnit, shortFloat, getTypeMap,
+  convertToNum, convertAttrs, convertUnit, shortFloat, getTypeMap, parseLengthValue,
   init as unitsInit
 } from './units.js';
 import {
@@ -4609,7 +4609,8 @@ this.setSvgString = function (xmlString, preventUndo) {
           // Use user units if percentage given
           percs = true;
         } else {
-          attrs[dim] = convertToNum(dim, val);
+          const parsed = parseLengthValue(dim, val);
+          attrs[dim] = parsed.inPx;
         }
       });
     }
